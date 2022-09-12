@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping
-@RestController("customers")
+@RestController
+@RequestMapping("customers")
 public class CustomerController {
 
     private final CustomerService customerService;
