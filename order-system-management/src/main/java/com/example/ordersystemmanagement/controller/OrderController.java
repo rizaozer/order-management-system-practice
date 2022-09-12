@@ -2,10 +2,7 @@ package com.example.ordersystemmanagement.controller;
 
 import com.example.ordersystemmanagement.entity.Order;
 import com.example.ordersystemmanagement.service.OrderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,10 @@ public class OrderController {
     @GetMapping
     public List<Order> search() {
         return null;
+    }
+
+    @PutMapping("{id}/change-quantity")
+    public Order changeQuantity(@PathVariable long id, @RequestBody String productName, int newQuantity) {
+        return orderService.changeQuantity(id, productName, newQuantity);
     }
 }
