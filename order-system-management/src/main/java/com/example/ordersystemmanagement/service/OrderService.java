@@ -1,5 +1,6 @@
 package com.example.ordersystemmanagement.service;
 
+import com.example.ordersystemmanagement.api.OrderSearch;
 import com.example.ordersystemmanagement.entity.Order;
 import com.example.ordersystemmanagement.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,15 @@ public class OrderService {
                 .ifPresent(orderLine -> orderLine.setQuantity(newQuantity));
 
         return orderRepository.save(order.get());
+    }
+
+    public List<Order> search(OrderSearch orderSearch) {
+        return switch (orderSearch.getKey()) {
+            case DATE -> orderRepository.findAllByCreationDate(orderSearch.getDateValue());
+            case CUSTOMER -> orderRepository.findAllByCustomerName(orderSearch.getStringValue());
+            case PRODUCT_NAME -> orderRepository.findAllByProductName(orderSearch.getStringValue());
+            case SKU_CODE -> orderRepository.findAllByProductSkuCode(orderSearch.getIntegerValue());
+        };
     }
 
 }
