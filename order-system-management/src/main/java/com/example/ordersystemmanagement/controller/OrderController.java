@@ -1,5 +1,6 @@
 package com.example.ordersystemmanagement.controller;
 
+import com.example.ordersystemmanagement.api.OrderSearch;
 import com.example.ordersystemmanagement.api.ProductQuantityChange;
 import com.example.ordersystemmanagement.entity.Order;
 import com.example.ordersystemmanagement.service.OrderService;
@@ -22,9 +23,22 @@ public class OrderController {
         orderService.insertOrder(order);
     }
 
-    @GetMapping
-    public List<Order> search() {
-        return null;
+
+    /**
+     *
+     * @param orderSearch like: {
+     *                              "key": "date" / "DATE" / "Product_scu" / ....
+     *                              "value: "asdas" / 123 / "13.06.2022"
+     *                          }
+     * @return list of found orders.
+     */
+    @GetMapping("search")
+    public List<Order> search(@RequestBody OrderSearch orderSearch) {
+        try {
+            return orderService.search(orderSearch);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @PutMapping("{id}/change-quantity")
