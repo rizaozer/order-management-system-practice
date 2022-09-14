@@ -1,5 +1,6 @@
 package com.example.ordersystemmanagement.controller;
 
+import com.example.ordersystemmanagement.api.ProductQuantityChange;
 import com.example.ordersystemmanagement.entity.Order;
 import com.example.ordersystemmanagement.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class OrderController {
     }
 
     @PutMapping("{id}/change-quantity")
-    public Order changeQuantity(@PathVariable long id, @RequestBody String productName, int newQuantity) {
-        return orderService.changeQuantity(id, productName, newQuantity);
+    public Order changeQuantity(@PathVariable long id, @RequestBody ProductQuantityChange productQuantityChange) {
+        return orderService.changeQuantity(id, productQuantityChange.getProductName(), productQuantityChange.getNewQuantity());
     }
 }
