@@ -11,10 +11,10 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAllByCreationDate(LocalDate creationDate);
 
-    @Query("SELECT o FROM Order o WHERE o.customer.fullName = :name")
+    @Query("SELECT o FROM Order o WHERE o.customer.customerName = :name")
     List<Order> findAllByCustomerName(String name);
 
-    @Query("SELECT o FROM Order o JOIN o.orderLines ol WHERE ol.product.name = :productName")
+    @Query("SELECT o FROM Order o JOIN o.orderLines ol WHERE ol.product.productName = :productName")
     List<Order> findAllByProductName(String productName);
 
     @Query("SELECT o FROM Order o JOIN o.orderLines ol WHERE ol.product.skuCode = :skuCode")
