@@ -1,0 +1,65 @@
+{
+  "customers": [
+    {
+      "ref": 2,
+      "registrationCode": "1231",
+      "fullName": "G R",
+      "email": "123@ads.c",
+      "phoneNumber": "213"
+    },
+    {
+      "ref": 3,
+      "registrationCode": "1231a",
+      "fullName": "New Customer",
+      "email": "123@ads.c",
+      "phoneNumber": "2131"
+    }
+  ],
+  "products": [
+    {
+      "ref": 1,
+      "name": "p1",
+      "skuCode": 1234,
+      "unitPrice": 123.54
+    }
+  ],
+  "orders": [
+    {
+      "customer": 2,
+      "orderLines": [
+        {
+          "quantity": 3,
+          "product": 1
+        }
+      ],
+      "creationDate": [
+        2020,
+        12,
+        12
+      ]
+    },
+    {
+      "customer": 2,
+      "orderLines": [
+        {
+          "quantity": 2,
+          "product": 1
+        }
+      ],
+      "creationDate": [
+        2021,
+        12,
+        12
+      ]
+    },
+    {
+      "customer": 3,
+      "orderLines": [
+        {
+          "quantity": 4,
+          "product": 1
+        }
+      ]
+    }
+  ]
+}
