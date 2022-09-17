@@ -3,6 +3,8 @@ package com.example.ordersystemmanagement.controller;
 import com.example.ordersystemmanagement.api.OrderSearch;
 import com.example.ordersystemmanagement.api.ProductQuantityChange;
 import com.example.ordersystemmanagement.entity.Order;
+import com.example.ordersystemmanagement.exception.ProductNotFoundException;
+import com.example.ordersystemmanagement.repository.OrderRepository;
 import com.example.ordersystemmanagement.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private OrderRepository orderRepository;
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
@@ -37,12 +40,15 @@ public class OrderController {
         try {
             return orderService.search(orderSearch);
         } catch (Exception e) {
-            throw e;
+            throw new ProductNotFoundException(orderSearch.getKey() + "is not found.");
         }
     }
 
     @PutMapping("{id}/change-quantity")
     public Order changeQuantity(@PathVariable long id, @RequestBody ProductQuantityChange productQuantityChange) {
+        if(orderRepository.findById(id).isEmpty()) {
+            throw new ProductNotFoundException(id + " is not exists.");
+        }
         return orderService.changeQuantity(id, productQuantityChange.getProductName(), productQuantityChange.getNewQuantity());
     }
 }
